@@ -70,17 +70,69 @@ bool ehEuleriano(vector<vector<int> > grafo){
     return true;
 }
 
-vector<int> fleury(vector<vector<int> > grafo){
-    int numeroVertices = grafo.size(), i, j;
+bool possuiCaminho(vector<vector<int> > &grafo, set<int> &vis, int o, int d){
+    if (o == d) return true;
+    vis.insert(o);
+    int numeroArestas = grafo[o].size();
+    for (int i = 0; i < numeroArestas; i++){
+        if (vis.count(grafo[o][i]) == 0){
+            if (possuiCaminho(grafo, vis, grafo[o][i], d)) return true;
+        }
+    }
+    return false;
+}
 
+list<int> fleury(vector<vector<int> > grafo){
+    int numeroVertices = grafo.size(), i, j, numeroArestas = 0, vi, vaux;
+    vector<vector<int> > aux = grafo;
+    list<int> caminho;
+    pair<int,int> aresta;
+    for (int i = 0; i < numeroVertices; i++){
+        numeroArestas += grafo[i].size();
+    }
+    caminho.push_back(0);
+    while (numeroArestas > 0){
+        vi = caminho.back();
+        if (aux[vi].size() == 1){
+            aresta = make_pair(vi, aux[vi][0]);
+        } else {
+            for (i = 0; i < aux[vi].size(); i++){
+                if (aux[vi][i] == -1) continue;
+                vaux = aux[vi][i];
+                aux[vi][i] = -1;
+                for (j = 0; j < aux[vaux].size(); j++){
+                    if (aux[vaux][j] == vi) break;
+                }
+                aux[vaux][j] = -1;
+                set<int> vis;
+                if (possuiCaminho(aux,vis,vi,vaux)){
+                    aresta = make_pair(vi,vaux);
+                    break;
+                } else {
+                    aux[vi][i] = vaux;
+                    aux[vaux][j] = vi;
+                }
+            }
+        }
+        numeroArestas-=2;
+        caminho.push_back(aresta.second);
+    }
+    caminho.unique();
+    return caminho;
 }
 
 int main(int argc, char const *argv[]) {
     vector<vector<int> > listaAdjacencia = leituraLista("graph.txt");
     int i,j;
+    set<int> emptySet;
+    cout << possuiCaminho(listaAdjacencia, emptySet, 0, 2) << endl;
     if (ehConexo(listaAdjacencia)){
         if (ehEuleriano(listaAdjacencia)){
-            cout << "ce" << endl;
+            list<int> caminhoEuleriano = fleury(listaAdjacencia);
+            for (const int &i:caminhoEuleriano){
+                cout << i << " ";
+            }
+            cout << endl;
         } else cout << "c" << endl;
     } else cout << "n" << endl;
     // for (i = 0; i < listaAdjacencia.size(); i++){
