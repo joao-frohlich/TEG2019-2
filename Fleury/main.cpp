@@ -75,17 +75,17 @@ bool possuiCaminho(vector<vector<int> > &grafo, set<int> &vis, int o, int d){
     vis.insert(o);
     int numeroArestas = grafo[o].size();
     for (int i = 0; i < numeroArestas; i++){
-        if (vis.count(grafo[o][i]) == 0){
+        if (vis.count(grafo[o][i]) == 0 && grafo[o][i] != -1){
             if (possuiCaminho(grafo, vis, grafo[o][i], d)) return true;
         }
     }
     return false;
 }
 
-list<int> fleury(vector<vector<int> > grafo){
+vector<int> fleury(vector<vector<int> > grafo){
     int numeroVertices = grafo.size(), i, j, numeroArestas = 0, vi, vaux;
     vector<vector<int> > aux = grafo;
-    list<int> caminho;
+    vector<int> caminho;
     pair<int,int> aresta;
     for (int i = 0; i < numeroVertices; i++){
         numeroArestas += grafo[i].size();
@@ -95,6 +95,12 @@ list<int> fleury(vector<vector<int> > grafo){
         vi = caminho.back();
         if (aux[vi].size() == 1){
             aresta = make_pair(vi, aux[vi][0]);
+            vaux = aux[vi][0];
+            for (i = 0; i < aux[vaux].size(); i++){
+                if (aux[vaux][i] == vi) break;
+            }
+            j = i;
+            i = 0;
         } else {
             for (i = 0; i < aux[vi].size(); i++){
                 if (aux[vi][i] == -1) continue;
@@ -114,10 +120,11 @@ list<int> fleury(vector<vector<int> > grafo){
                 }
             }
         }
+        aux[vi].erase(aux[vi].begin()+i);
+        aux[vaux].erase(aux[vaux].begin()+j);
         numeroArestas-=2;
         caminho.push_back(aresta.second);
     }
-    caminho.unique();
     return caminho;
 }
 
@@ -128,7 +135,7 @@ int main(int argc, char const *argv[]) {
     cout << possuiCaminho(listaAdjacencia, emptySet, 0, 2) << endl;
     if (ehConexo(listaAdjacencia)){
         if (ehEuleriano(listaAdjacencia)){
-            list<int> caminhoEuleriano = fleury(listaAdjacencia);
+            vector<int> caminhoEuleriano = fleury(listaAdjacencia);
             for (const int &i:caminhoEuleriano){
                 cout << i << " ";
             }
