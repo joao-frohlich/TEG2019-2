@@ -9,6 +9,7 @@ using namespace std;
 typedef pair<int,int> ii;
 vector<vector<ii > > adjList;
 priority_queue<ii, vector<ii>, greater<ii> > f;
+vector<vector<int> > precedencia;
 
 vector<int> dijkstra(int o){
     int n = adjList.size(), m,z;
@@ -17,6 +18,7 @@ vector<int> dijkstra(int o){
     vector<int> caminho;
     for (int i = 0; i < n; i++){
         caminho.pb(INF);
+        precedencia.pb(vector<int> {-1});
     }
     caminho[o] = 0;
     while (!f.empty()){
@@ -29,6 +31,10 @@ vector<int> dijkstra(int o){
             if (z < caminho[y.fi]){
                 f.push(mp(z,y.fi));
                 caminho[y.fi] = z;
+                precedencia[y.fi].clear();
+                precedencia[y.fi].pb(x.se);
+            } else if (z == caminho[y.fi]){
+                precedencia[y.fi].pb(x.se);
             }
         }
     }
@@ -45,8 +51,16 @@ int main(int argc, char const *argv[]) {
         adjList[x].pb(mp(y,z));
     }
     c = dijkstra(0);
-    for (int i = 0; i < c.size(); i++){
-        cout << c[i] << endl;
+
+    printf("Nó\tDist\tPai\n");
+    for (int i = 0; i < precedencia.size(); i++){
+        cout << (char)(i+65) <<"\t"<< c[i];
+        cout << "\t" << precedencia[i][0];
+        for (int j = 1; j < precedencia[i].size(); j++){
+            cout << ", " << precedencia[i][j];
+        }
+        cout << endl;
     }
+    cout << endl;
     return 0;
 }
