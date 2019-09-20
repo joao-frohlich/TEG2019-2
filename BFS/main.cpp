@@ -68,19 +68,23 @@ void bfs(int raiz){
             }
         }
     }
-    cout << "Pai:" << endl;
     for (int i = 0; i < adjList.size(); i++){
-        printf("%c:%d\n", i+97, pai[i]);
+        cout << "\t" << (char)(i+97);
     }
-    cout << endl << endl;
-    cout << "L:" << endl;
+    cout << endl;
+    cout << "Pai:";
     for (int i = 0; i < adjList.size(); i++){
-        printf("%c:%d\n", i+97, L[i]);
+        printf("\t%d", pai[i]);
     }
-    cout << endl << endl;
-    cout << "Nivel:" << endl;
+    cout << endl;
+    cout << "L:";
     for (int i = 0; i < adjList.size(); i++){
-        printf("%c:%d\n", i+97, nivel[i]);
+        printf("\t%d", L[i]);
+    }
+    cout << endl;
+    cout << "Nivel:";
+    for (int i = 0; i < adjList.size(); i++){
+        printf("\t%d", nivel[i]);
     }
     cout << endl << endl;
     cout << "Arestas:" << endl;
