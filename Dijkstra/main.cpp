@@ -5,7 +5,7 @@ using namespace std;
 #define pb push_back
 #define fi first
 #define se second
-#define INF 100009
+#define INF 1000000007
 typedef pair<int,int> ii;
 vector<vector<ii > > adjList;
 priority_queue<ii, vector<ii>, greater<ii> > f;
@@ -55,9 +55,14 @@ int main(int argc, char const *argv[]) {
     printf("Nó\tDist\tPai\n");
     for (int i = 0; i < precedencia.size(); i++){
         cout << (char)(i+65) <<"\t"<< c[i];
-        cout << "\t" << precedencia[i][0];
+        cout << "\t";
+        if (precedencia[i][0] == -1){
+            cout << "Raiz";
+        } else {
+            cout << (char)(precedencia[i][0]+65);
+        }
         for (int j = 1; j < precedencia[i].size(); j++){
-            cout << ", " << precedencia[i][j];
+            cout << ", " << (char)(precedencia[i][j]+65);
         }
         cout << endl;
     }

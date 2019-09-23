@@ -113,7 +113,8 @@ int main(int argc, char const *argv[]) {
         adjList[x].push_back(y);
         adjList[y].push_back(x);
     }
-    bfs(6);
+    cin >> x;
+    bfs(x-1);
     cout << "a" << endl;
     return 0;
 }
