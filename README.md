@@ -1,7 +1,7 @@
 # TEG2019-2
 Repositorio para armazenar os codigos utilizados na materia de TEG
 
-**Visualizador de algoritmos:** [visualgo](visualgo.net)
+**Visualizador de algoritmos:** [visualgo](https://visualgo.net)
 
 ## Algoritmos implementados
 
