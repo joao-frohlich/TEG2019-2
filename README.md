@@ -5,15 +5,15 @@ Repositorio para armazenar os codigos utilizados na materia de TEG
 
 ## Algoritmos implementados
 
-### * Ordenação Topológica:
+* **Ordenação Topológica:**
   * Algoritmo de Kanh
 
-### * Encontrar caminho euleriano:
+* **Encontrar caminho euleriano:**
   * Algoritmo de Fleury
 
-### * Percorrer Árvores:
+* **Percorrer Árvores:**
   * DFS
   * BFS
 
-### * Caminho mínimo:
+* **Caminho mínimo:**
   * Dijkstra
