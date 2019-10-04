@@ -21,4 +21,4 @@ Repositorio para armazenar os codigos utilizados na materia de TEG
 
 * **Arvore Geradora Minima:**
   * Prim (C++)
-  * Kruskal (Todo)
+  * Kruskal (C++)
