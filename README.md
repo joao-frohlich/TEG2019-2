@@ -18,3 +18,7 @@ Repositorio para armazenar os codigos utilizados na materia de TEG
 * **Caminho mínimo:**
   * Dijkstra (C++)
   * Floyd-Warshall (C)
+
+* **Arvore Geradora Minima:**
+  * Prim (C++)
+  * Kruskal (Todo)
