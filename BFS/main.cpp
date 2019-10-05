@@ -68,38 +68,28 @@ void bfs(int raiz){
             }
         }
     }
-    for (int i = 0; i < adjList.size(); i++){
-        cout << "\t" << (char)(i+97);
-    }
-    cout << endl;
-    cout << "Pai:";
-    for (int i = 0; i < adjList.size(); i++){
-        printf("\t%d", pai[i]);
-    }
-    cout << endl;
-    cout << "L:";
-    for (int i = 0; i < adjList.size(); i++){
-        printf("\t%d", L[i]);
-    }
-    cout << endl;
-    cout << "Nivel:";
-    for (int i = 0; i < adjList.size(); i++){
-        printf("\t%d", nivel[i]);
-    }
-    cout << endl << endl;
-    cout << "Arestas:" << endl;
+    FILE *fp = fopen("graph.dot", "w");
+    fprintf(fp, "digraph BFS {\n");
     for (int i = 0; i < arestas.size(); i++){
-        printf("%c->%c, ", arestas[i].first.first+97, arestas[i].first.second+97);
+        fprintf(fp,"\t%c -> %c[", arestas[i].first.first+97, arestas[i].first.second+97);
         if (arestas[i].second == BLUE){
-            cout << "azul" << endl;
+            fprintf(fp, "color=blue,penwidth=3.0];\n");
         } else if (arestas[i].second == YELLOW){
-            cout << "amarelo" << endl;
+            fprintf(fp, "color=yellow,penwidth=3.0];\n");
         } else if (arestas[i].second == RED){
-            cout << "vermelho" << endl;
+            fprintf(fp, "color=red,penwidth=3.0];\n");
         } else {
-            cout << "verde" << endl;
+            fprintf(fp, "color=green,penwidth=3.0];\n");
         }
     }
+    fprintf(fp, "\n\tnode [fontname=%cArial%c]\n", 34, 34);
+    fprintf(fp, "\tnode_A [shape=record label=%c{Vertices|Pai|L|Nivel}", 34);
+    for (int i = 0; i < adjList.size(); i++){
+        fprintf(fp, "|{%c|%d|%d|%d}", (char)(i+97), pai[i], L[i], nivel[i]);
+    }
+    fprintf(fp, "%c];\n\n}\n", 34);
+    fclose(fp);
+
 }
 
 int main(int argc, char const *argv[]) {
@@ -115,6 +105,6 @@ int main(int argc, char const *argv[]) {
     }
     cin >> x;
     bfs(x-1);
-    cout << "a" << endl;
+    cout << "Programa executado com sucesso" << endl;
     return 0;
 }

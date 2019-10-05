@@ -1,0 +1,23 @@
+digraph BFS {
+	a -> b[color=blue,penwidth=3.0];
+	a -> e[color=blue,penwidth=3.0];
+	b -> c[color=blue,penwidth=3.0];
+	b -> f[color=blue,penwidth=3.0];
+	e -> f[color=green,penwidth=3.0];
+	e -> i[color=blue,penwidth=3.0];
+	c -> d[color=blue,penwidth=3.0];
+	c -> g[color=blue,penwidth=3.0];
+	f -> g[color=green,penwidth=3.0];
+	f -> j[color=blue,penwidth=3.0];
+	i -> j[color=green,penwidth=3.0];
+	d -> h[color=blue,penwidth=3.0];
+	g -> h[color=green,penwidth=3.0];
+	g -> k[color=blue,penwidth=3.0];
+	j -> k[color=green,penwidth=3.0];
+	h -> l[color=blue,penwidth=3.0];
+	k -> l[color=green,penwidth=3.0];
+
+	node [fontname="Arial"]
+	node_A [shape=record label="{Vertices|Pai|L|Nivel}|{a|-1|1|0}|{b|0|2|1}|{c|1|4|2}|{d|2|7|3}|{e|0|3|1}|{f|1|5|2}|{g|2|8|3}|{h|3|10|4}|{i|4|6|2}|{j|5|9|3}|{k|6|11|4}|{l|7|12|5}"];
+
+}

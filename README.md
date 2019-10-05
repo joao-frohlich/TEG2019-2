@@ -13,7 +13,7 @@ Repositorio para armazenar os codigos utilizados na materia de TEG
 
 * **Percorrer Árvores:**
   * DFS (C++)
-  * BFS (C++)
+  * BFS (C++; Visualização com Graphviz; Execução via Shell Script)
 
 * **Caminho mínimo:**
   * Dijkstra (C++)
